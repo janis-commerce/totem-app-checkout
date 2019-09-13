@@ -1,5 +1,5 @@
 'use strict';
 
-const { Cart } = require('./lib');
+const modules = require('./lib');
 
-module.exports = Cart;
+module.exports = modules;
