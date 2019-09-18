@@ -33,6 +33,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "@hapi/joi": "^16.1.1",
     "fetch-mock": "^7.3.9",
     "isomorphic-fetch": "^2.2.1",
     "node-fetch": "^2.6.0"

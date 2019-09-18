@@ -10,8 +10,8 @@ const {
 } = require('./mocks/cart');
 
 
-const createCart = env => {
-	return new Cart(env);
+const createCart = environment => {
+	return new Cart({ environment });
 };
 
 const SERVER_ERROR_MESSAGE = 'MOCK SERVER ERROR';
