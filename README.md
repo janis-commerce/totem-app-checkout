@@ -19,8 +19,13 @@ const { Cart } = require('totem-app-checkout');
 
 <dl>
 <dt><a href="#Cart">Cart</a></dt>
+<dt><a href="#Order">Order</a></dt>
 <dd></dd>
 </dl>
+
+<a name="Cart"></a>
+
+## Cart
 
 ## Functions
 
@@ -42,16 +47,11 @@ const { Cart } = require('totem-app-checkout');
 </dd>
 </dl>
 
-<a name="Cart"></a>
 
-## Cart
-**Kind**: global class
 <a name="addItems"></a>
 
 ## addItems(items) ⇒ <code>Promise</code>
 Function for add a new item or items to current order
-
-**Kind**: global function
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -80,8 +80,6 @@ const cart = await CartInstance.addItems([{
 ## changeItemQuantity(items) ⇒ <code>Promise</code>
 Function for change the quantity to item into the current orderForm
 
-**Kind**: global function
-
 | Param | Type | Description |
 | --- | --- | --- |
 | items | <code>array</code> \| <code>object</code> | Object or Array of Objects |
@@ -108,8 +106,6 @@ const cart = await CartInstance.changeItemsQuantity([{
 ## removeItems(items) ⇒ <code>Promise</code>
 Function for remove items
 
-**Kind**: global function
-
 | Param | Type | Description |
 | --- | --- | --- |
 | items | <code>array</code> \| <code>object</code> | Object or Array of Objects |
@@ -131,8 +127,6 @@ const cart = await CartInstance.removeItems([{
 
 ## removeAllItems() ⇒ <code>Promise</code>
 Function for remove all items
-
-**Kind**: global function
 **Example**
 ```js
 const cart = await CartInstance.removeAllItems();
@@ -142,23 +136,113 @@ const cart = await CartInstance.removeAllItems();
 ## simulate(items) ⇒ <code>Promise</code>
 Function for simulate cart
 
-**Kind**: global function
-
 | Param | Type | Description |
 | --- | --- | --- |
 | items | <code>array</code> \| <code>object</code> | Object or Array of Objects |
-| items.id | <code>number</code> | id of sku product. |
-| items.quantity | <code>number</code> |  |
+| 	items.id | <code>number</code> | id of sku product. |
+| 	items.quantity | <code>number</code> |  |
+| postalCode | <code>number</code> | PostalCoode for get availables slas |
 
 **Example**
 ```js
 const cartSimulated = await CartInstance.simulate({
     id: 17,
     quantity: 2
-});
+}, 1000);
 
  const cartSimulated = await CartInstance.simulate([{
     id: 17,
     quantity: 2
-}]);
+}], 1000);
+```
+
+<a name="Order"></a>
+
+## Order
+
+## Functions
+
+<dl>
+<dt><a href="#create">create(data)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Create new Order</p>
+</dd>
+<dt><a href="#sendTransactionPayments">sendTransactionPayments(data, transactionId)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Define in order Payment Methods</p>
+</dd>
+<dt><a href="#authorizeTransaction">authorizeTransaction(transactionId)</a> ⇒ <code>Promise</code></dt>
+<dd><p>Authorize Payment Methods order</p>
+</dd>
+<dt><a href="#clearorder">clearOrder()</a></dt>
+<dd><p>Clear order created cached and data initial passed</p></dd>
+</dl>
+
+
+<a name="create"></a>
+
+## create(data) ⇒ <code>Promise</code>
+Create new Order
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | <code>object</code> | Object |
+| data.cart  | <code>object</code> | Object Cart or Object Cart simulation
+| data.slaId | <code>number</code> \| <code>string</code> | id of sku product. |
+| data.paymentSystemId | <code>number</code> \| <code>string</code>  | id of payment system
+
+<a name="sendTransactionPayments"></a>
+
+## sendTransactionPayments(data) ⇒ <code>Promise</code>
+Create new Order
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | <code>object</code> | Object |
+|	data.cart  | <code>object</code> | Object Cart or Object Cart simulation
+| 	data.slaId | <code>number</code> \| <code>string</code> | id of sku product. |
+| 	data.paymentSystemId | <code>number</code> \| <code>string</code>  | id of payment system
+| transactionId | <code>string</code> | id of transaction |
+
+**if not pass data or transactionId, the function use data used in create and transactionId into order created cached**
+
+<a name="authorizeTransaction"></a>
+
+## authorizeTransaction(data) ⇒ <code>Promise</code>
+Create new Order
+
+| Param | Type | Description |
+| --- | --- | --- |
+| transactionId | <code>string</code> | id of transaction |
+
+**if not pass transactionId, the function use transactionId into order created cached**
+
+
+**Example**
+```js
+const order = new Order({
+	environment: 'testqa',
+	apiKey: 'apiKey',
+	apiToken: 'apiToken'
+});
+
+const data = await order.create({
+	cart: orderSimulated,
+	slaId: 'Normal',
+	paymentSystemId: 201,
+	paymentFields: {
+		"holderName": "Test VTEX",
+		"cardNumber": "4704550000000005",
+		"validationCode": "",
+		"dueDate": "12/22",
+		"document": "",
+		"accountId": "",
+		"address": null,
+		"callbackUrl": ""
+	}
+});
+
+const sendPaymentResponse = await order.sendTransactionPayments();
+
+const authorizeResponse = await order.authorizeTransaction();
+
+
 ```

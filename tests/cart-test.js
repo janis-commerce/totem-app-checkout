@@ -31,6 +31,19 @@ describe('Cart test', () => {
 		fetchMock.restore();
 	});
 
+	it('should error if not pass environment or not pass object in constructor', () => {
+		assert.throws(() => {
+			new Cart();
+		}, {
+			message: 'environment not defined, please pass environment in instance'
+		});
+
+		assert.throws(() => {
+			createCart();
+		}, {
+			message: 'environment not defined, please pass environment in instance'
+		});
+	});
 
 	it('should error if not pass environment', () => {
 		assert.throws(() => {
