@@ -22,8 +22,6 @@ const orderInstance = new Order({ environment: 'tiendaqa', apiKey: 'API_KEY', ap
 
 ## Methods
 
-<a name="addItems"></a>
-
 ## addItems(items) ⇒ `Promise`
 Function for add a new item or items to current order
 
@@ -102,7 +100,6 @@ Function for remove all items
 ```js
 const cart = await CartInstance.removeAllItems();
 ```
-<a name="simulate"></a>
 
 ## simulate(items) ⇒ `Promise`
 Function for simulate cart
@@ -126,8 +123,6 @@ const cartSimulated = await cartInstance.simulate({
     quantity: 2
 }], 1000);
 ```
-
-<a name="clearCart"></a>
 
 ## clearCart()
 Function for clear cart cached in instance then call getOrder method
@@ -212,8 +207,6 @@ await orderInstance.sendTransactionPayments(data, 'TRANSACTION_ID');
 await orderInstance.sendTransactionPayments();
 ```
 
-<a name="authorizeTransaction"></a>
-
 ## authorizeTransaction(data) ⇒ `Promise`
 Authorize Payment Methods order
 
@@ -231,8 +224,6 @@ await orderInstance.authorizeTransaction('TRANSACTION_ID');
 // authorizeTransaction with transactionId in order cached
 await orderInstance.authorizeTransaction();
 ```
-
-<a name="clearOrder"></a>
 
 ## clearOrder()
 Clear order created cached and data initial passed
