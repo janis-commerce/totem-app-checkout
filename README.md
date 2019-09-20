@@ -1,9 +1,9 @@
-# totem-app-checkout
+# @janiscommerce/totem-checkout
 
 
 ## Installation
 ```sh
-npm install totem-app-checkout
+npm install @janiscommerce/totem-checkout
 ```
 
 ## API
@@ -11,7 +11,7 @@ npm install totem-app-checkout
 
 ## Usage
 ```js
-const { Cart, Order } = require('totem-app-checkout');
+const { Cart, Order } = require('@janiscommerce/totem-checkout');
 
 const cartInstance = new Cart({ environment: 'tiendaqa' })
 

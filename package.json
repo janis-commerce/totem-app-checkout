@@ -1,5 +1,5 @@
 {
-  "name": "totem-app-checkout",
+  "name": "@janiscommerce/totem-checkout",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
