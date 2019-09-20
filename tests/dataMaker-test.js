@@ -120,7 +120,7 @@ describe('DataMaker test', () => {
 
 		const mock2 = copyObj(dataOrderMock);
 
-		mock2.slaId = 222;
+		mock2.slaId = 'Domicilio';
 
 		assert.throws(() => {
 			maker.makeOrder(mock2);
