@@ -1,8 +1,9 @@
 'use strict';
 
-const { Cart, Order } = require('./lib');
+const { Cart, Order, Payment } = require('./lib');
 
 module.exports = {
 	Cart,
-	Order
+	Order,
+	Payment
 };
