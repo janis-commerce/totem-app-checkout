@@ -11,11 +11,13 @@ npm install @janiscommerce/totem-checkout
 
 ## Usage
 ```js
-const { Cart, Order } = require('@janiscommerce/totem-checkout');
+const { Payment, Cart, Order } = require('@janiscommerce/totem-checkout');
 
 const cartInstance = new Cart({ environment: 'tiendaqa' })
 
 const orderInstance = new Order({ environment: 'tiendaqa', apiKey: 'API_KEY', apiToken: 'API_TOKEN' });
+
+const paymentInstance = new Payment({ environment: 'tiendaqa', apiKey: 'API_KEY', apiToken: 'API_TOKEN', slaId: 'SLA_ID' });
 ```
 
 ## Cart
@@ -284,4 +286,36 @@ const data = await order.create({
 const sendPaymentResponse = await order.sendTransactionPayments();
 
 const authorizeResponse = await order.authorizeTransaction();
+```
+
+## Payment
+
+## Methods
+
+## collect(value, paymentSystem, transactionId, cart, isCash, isContacless) ⇒ `Promise`
+Function for add a new item or items to current order
+
+| Param          | Type             | Description                                      | Default |
+| ---            | ---              | ---                                              | ---     |
+| value          | `number`         | Value cart total                                 |         |
+| paymentSystem  | `string|number`  | id of payment                                    |         |
+| transactionId  | `string`         | id of transaction                                |         |
+| cart           | `object`         | object cart simulated                            |         |
+| isCash         | `boolean`        | is payment in cash or not                        | false   |
+| isContacless   | `boolean`        | is payment with card contacless                  | false   |
+
+## Creating a payment
+
+```js
+  // payment with transaction id with card
+  await payment.collect(18300, 2, 'TRANSACTION_ID');
+
+  // payment with cart simlated with card
+  await payment.collect(18300, 2, null, cartSimulatedObj);
+
+  // payment with transaction id in cash
+  await payment.collect(18300, 1, 'TRANSACTION_ID', null, true);
+
+  // payment with cart simlated in cash
+  await payment.collect(18300, 1, null, cartSimulatedObj, true);
 ```
