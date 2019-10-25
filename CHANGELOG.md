@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.1.0] - 2019-10-25
 - Add fullpayment with mt188-card-reader and vtex
+- Fix card reader execution
 
 ## [1.0.0] - 2019-09-20
 ### Added

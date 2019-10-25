@@ -38,9 +38,9 @@ const mockfetchCreate = (mockError = false) => {
 
 const mockCardReader = (mockError = false) => {
 	if(mockError)
-		return sandbox.stub(MT188CardReader, 'getPANWithRetries').rejects(new Error('MT188CardReaderError'));
+		return sandbox.stub(MT188CardReader.prototype, 'getPANWithRetries').rejects(new Error('MT188CardReaderError'));
 
-	sandbox.stub(MT188CardReader, 'getPANWithRetries').resolves({
+	sandbox.stub(MT188CardReader.prototype, 'getPANWithRetries').resolves({
 		cardNumber: '4704550000000005',
 		expirationMonth: '12',
 		expirationYear: '22'
@@ -173,6 +173,63 @@ describe('Order test', () => {
 		assert(createSpy.calledOnce);
 		assert(authorizeTransactionSpy.calledOnce);
 		assert(sendsendTransactionPaymentsSpy.calledOnce);
+	});
+
+
+	it('should pass validation when collect only with transaction id contacless', async () => {
+		mockfetchTransactions();
+		mockCardReader();
+
+		const paymentReadSpy = sandbox.spy(Payment.prototype, 'readCard');
+
+		const payment = createValidPayment();
+
+		await payment.collect(1000, 1, 'TRANSACTION_ID', null, false, true);
+
+		assert(paymentReadSpy.calledWithExactly(true));
+	});
+
+	it('should pass validation when collect only with cart contacless', async () => {
+		mockfetchCreate();
+		mockfetchTransactions();
+		mockCardReader();
+
+		const paymentReadSpy = sandbox.spy(Payment.prototype, 'readCard');
+
+		const payment = createValidPayment();
+
+		await payment.collect(1000, 2, null, orderSimulated, null, true);
+
+		assert(paymentReadSpy.calledWithExactly(true));
+
+	});
+
+	it('should pass validation when collect only with transaction id contacless default', async () => {
+		mockfetchTransactions();
+		mockCardReader();
+
+		const paymentReadSpy = sandbox.spy(Payment.prototype, 'readCard');
+
+		const payment = createValidPayment();
+
+		await payment.collect(1000, 1, 'TRANSACTION_ID', null, false);
+
+		assert(paymentReadSpy.calledWithExactly(false));
+	});
+
+	it('should pass validation when collect only with cart contacless default', async () => {
+		mockfetchCreate();
+		mockfetchTransactions();
+		mockCardReader();
+
+		const paymentReadSpy = sandbox.spy(Payment.prototype, 'readCard');
+
+		const payment = createValidPayment();
+
+		await payment.collect(1000, 2, null, orderSimulated, null);
+
+		assert(paymentReadSpy.calledWithExactly(false));
+
 	});
 
 });
