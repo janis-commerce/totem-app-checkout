@@ -308,14 +308,14 @@ Function for add a new item or items to current order
 
 ```js
   // payment with transaction id with card
-  await payment.collect(18300, 2, 'TRANSACTION_ID');
+  await paymentInstance.collect(18300, 2, 'TRANSACTION_ID');
 
   // payment with cart simlated with card
-  await payment.collect(18300, 2, null, cartSimulatedObj);
+  await paymentInstance.collect(18300, 2, null, cartSimulatedObj);
 
   // payment with transaction id in cash
-  await payment.collect(18300, 1, 'TRANSACTION_ID', null, true);
+  await paymentInstance.collect(18300, 1, 'TRANSACTION_ID', null, true);
 
   // payment with cart simlated in cash
-  await payment.collect(18300, 1, null, cartSimulatedObj, true);
+  await paymentInstance.collect(18300, 1, null, cartSimulatedObj, true);
 ```
