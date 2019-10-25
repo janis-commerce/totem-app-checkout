@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "export TEST_ENV=true; mocha --exit -R nyan --recursive tests/",
-    "test-ci": "nyc --reporter=html --reporter=text mocha --recursive tests/",
-    "watch-test": "export TEST_ENV=true; mocha --exit -R nyan -w --recursive tests/",
+    "test": "export TEST_ENV=true; mocha --exit -R nyan --require tests/bootstrap.js --recursive tests/",
+    "test-ci": "nyc --reporter=html --reporter=text mocha --require tests/bootstrap.js --recursive tests/",
+    "watch-test": "export TEST_ENV=true; mocha --exit -R nyan -w --require tests/bootstrap.js --recursive tests/",
     "coverage": "nyc npm test",
     "lint": "eslint index.js lib/ tests/"
   },
@@ -23,6 +23,7 @@
     "eslint-plugin-import": "^2.17.3",
     "husky": "^2.4.1",
     "mocha": "^5.2.0",
+    "mock-require": "^3.0.3",
     "nyc": "^13.1.0",
     "sinon": "^7.3.2"
   },

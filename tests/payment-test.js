@@ -1,12 +1,11 @@
 'use strict';
 
+const { MT188CardReader } = require('@janiscommerce/mt188-card-reader');
 const assert = require('assert');
 const sandbox = require('sinon').createSandbox();
 const fetchMock = require('fetch-mock');
-const { Payment: PaymentObj, Order } = require('./../index');
+const { Payment, Order } = require('./../index');
 const { orderSimulated, orderCreated } = require('./mocks/order');
-
-const { Payment, MT188CardReader } = PaymentObj;
 
 const createPayment = data => {
 	return new Payment(data);
