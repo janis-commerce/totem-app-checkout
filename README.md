@@ -292,7 +292,7 @@ const authorizeResponse = await order.authorizeTransaction();
 
 ## Methods
 
-## collect(value, paymentSystem, transactionId, cart, isCash, isContacless) ⇒ `Promise`
+## collect(value, paymentSystem, transactionId, cart, isCash, isContactless) ⇒ `Promise`
 Function for add a new item or items to current order
 
 | Param          | Type             | Description                                      | Default |
@@ -302,7 +302,7 @@ Function for add a new item or items to current order
 | transactionId  | `string`         | id of transaction                                |         |
 | cart           | `object`         | object cart simulated                            |         |
 | isCash         | `boolean`        | is payment in cash or not                        | false   |
-| isContacless   | `boolean`        | is payment with card contacless                  | false   |
+| isContactless  | `boolean`        | is payment with card contacless                  | false   |
 
 ## Creating a payment
 
